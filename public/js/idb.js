@@ -1,8 +1,12 @@
 // create indexedDB need to refresh 18.4 lesson.
+
+//might need to create indexedDB variable and assign it to window...... browser's indexedDB
+
 // create variable to hold db connection
 let db;
 
 // establish a connection to IndexDB database called budget_tracker and set it to version 1
+// ! make sure DB is budget_tracker with underscore!!!!
 const request = indexedDB.open('budget_tracker', 1);
 
 // this event will emit if the database version changes (nonexistant to version 1, v1 to v2, etc.)
@@ -60,7 +64,8 @@ function uploadBudget() {
         // if there was data in indexedDb's store, let's send it to the api server
         if (getAll.result.length > 0) {
             // ! check this api could be /api/transactions/bulk
-            fetch('/api/budget', {
+            // post call from api.js in routes
+            fetch('/api/transaction/bulk', {
                 method: 'POST',
                 body: JSON.stringify(getAll.result),
                 headers: {
