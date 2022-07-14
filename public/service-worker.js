@@ -11,6 +11,8 @@ const FILES_TO_CACHE = [
     './icons/icon-192x192.png',
     './icons/icon-384x384.png',
     './icons/icon-512x512.png',
+    './js/idb.js',
+    './js/index.js',
     './index.html',
     './manifest.json',
 ];
@@ -26,7 +28,6 @@ self.addEventListener('install', function (e) {
     );
     self.skipWaiting();
 })
-//
 
 // Activate the service worker and remove old data from the cache
 // YOUR CODE HERE
