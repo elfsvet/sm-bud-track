@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color" content="#317EFB">
   <link rel="shortcut icon" href="icons/icon-192x192.png" type="image/x-icon">
-<!-- added link to manifest -->
+  <!-- added link to manifest -->
   <link rel="manifest" href="manifest.json">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,6 +15,7 @@
 
   <title>Budget Tracker</title>
 </head>
+
 <body>
   <div class="wrapper">
     <div class="total">
@@ -35,28 +37,34 @@
           <th>Amount</th>
         </thead>
         <tbody id="tbody">
-          
+
         </tbody>
       </table>
     </div>
-    
+
     <canvas id="myChart"></canvas>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <script src="js/index.js"></script>
+
+  <!-- add indexedDB -->
+  <script src="./js/idb.js"></script>
+
+  <script src="./js/index.js"></script>
+
+
   <!-- register a service worker -->
   <script type="text/javascript">
-    (function() {
+    (function () {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
           .register('./service-worker.js')
           .then(() => console.log('Service Worker registered successfully.'))
-          .catch(error =>
-            console.log('Service Worker registration failed:', error)
+          .catch(error => console.log('Service Worker registration failed:', error)
           );
       }
     })();
   </script>
 </body>
+
 </html>

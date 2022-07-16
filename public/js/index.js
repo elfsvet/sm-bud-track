@@ -136,6 +136,7 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
+    // takes function from idb.js saveRecord and has access to it because it is index.js
     saveRecord(transaction);
 
     // clear form

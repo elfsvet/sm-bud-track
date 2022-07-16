@@ -1,14 +1,11 @@
 // create indexedDB need to refresh 18.4 lesson.
-
-//might need to create indexedDB variable and assign it to window...... browser's indexedDB
-
 // create variable to hold db connection
 let db;
 
 // establish a connection to IndexDB database called budget_tracker and set it to version 1
 // ! make sure DB is budget_tracker with underscore!!!!
 const request = indexedDB.open('budget_tracker', 1);
-
+//event listener
 // this event will emit if the database version changes (nonexistant to version 1, v1 to v2, etc.)
 request.onupgradeneeded = function (e) {
     //save a reference to the db
@@ -17,7 +14,7 @@ request.onupgradeneeded = function (e) {
     db.createObjectStore('new_budget', { autoIncrement: true });
 };
 
-// upon a seccessful 
+// upon a successful 
 request.onsuccess = function (e) {
     // when db is successfully created with its object store (from onupgradeneeded event above) or simply establish a connection, save reference to db in global variable
     db = e.target.result;
@@ -26,7 +23,7 @@ request.onsuccess = function (e) {
     if (navigator.online) {
         // !dont forget
         // we haven't created this yet, but we will soon, so let's comment it out for now
-        // uploadBudget();
+        uploadBudget();
     }
 };
 // if error appear
@@ -35,22 +32,25 @@ request.onerror = function (e) {
     console.log(e.target.errorCode);
 };
 
-// this function will be executed if we attempt to subnit a new budget and there's no internet connection
+// this function will be executed if we attempt to submit a new budget and there's no internet connection
+// ! didn't use it here but need to be used in index.js form submission function if the fetch() function's .catch() method is executed.
 function saveRecord(record) {
     // open a new transaction with the database with read and write permissions
-    const transaction = db.transaction(['new_budget'], 'readWrite');
+    // temporary connection to the database
+    const transaction = db.transaction(['new_budget'], 'readwrite');
 
     // access the object store for 'new_budget'
     const budgetObjectStore = transaction.objectStore('new_budget');
 
     // add record to your store with add method
+    //  inserting data to the object store
     budgetObjectStore.add(record);
 };
 
 // we open a new transaction with the database to read and write the data.
 function uploadBudget() {
     // open a transaction on your db
-    const transaction = db.transaction(['new_budget'], 'readWrite');
+    const transaction = db.transaction(['new_budget'], 'readwrite');
 
     // access your object store
     const budgetObjectStore = transaction.objectStore('new_budget');
@@ -79,7 +79,8 @@ function uploadBudget() {
                         throw new Error(serverResponse);
                     }
                     // open one more transaction
-                    const transaction = db.transaction(['new_budget'], 'readWrite');
+                    // !!!!! READWRITE LOWER CASE = readwrite NO CAMEL CASE!!!!!!! Won't work
+                    const transaction = db.transaction(['new_budget'], 'readwrite');
 
                     // access the new_budget object store
                     budgetObjectStore.clear();
@@ -92,6 +93,6 @@ function uploadBudget() {
     };
 };
 
-// listen for app comming back online
+// listen for app coming back online
 window.addEventListener('online', uploadBudget);
 
