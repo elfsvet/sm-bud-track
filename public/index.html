@@ -53,18 +53,18 @@
   <script src="./js/index.js"></script>
 
 
-  <!-- register a service worker -->
-  <script type="text/javascript">
-    (function () {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('./service-worker.js')
-          .then(() => console.log('Service Worker registered successfully.'))
-          .catch(error => console.log('Service Worker registration failed:', error)
-          );
-      }
-    })();
-  </script>
 </body>
+<!-- register a service worker a closure to execute instantly-->
+<script type="text/javascript">
+  (function () {
+    if ("serviceWorker" in navigator) {
+      // don't use absolutes path here with service-worker.js
+      // registers the service worker.
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("Service Worker registered successfully."))
+        .catch(error => console.log("Service Worker registration failed:", error));
+    }
+  })();
+</script>
 
 </html>
