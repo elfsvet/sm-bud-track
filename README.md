@@ -36,7 +36,7 @@ To open this project in vscode using git in Terminal/Git Bash:
 
 ```
 cd in directory there you want to store your project
-git clone https://github.com/elfsvet/stepan-matysik-budget-tracker.git
+git clone https://github.com/elfsvet/sm-bud-track.git
 code .
 ```
 
