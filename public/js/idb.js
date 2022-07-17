@@ -83,6 +83,8 @@ function uploadBudget() {
                     const transaction = db.transaction(['new_budget'], 'readwrite');
 
                     // access the new_budget object store
+                    const budgetObjectStore = transaction.objectStore('new_budget');
+                    // access the new_budget object store
                     budgetObjectStore.clear();
 
                     alert('All saved budget has been submitted!');
